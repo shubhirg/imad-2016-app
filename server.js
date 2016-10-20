@@ -9,17 +9,17 @@ var articles = {
     'article-one' : {
             title : 'Article-One',
             heading : 'Hello',
-            body : 'This is article one. '
+            content : 'This is article one. '
     },
     'article-two' : {
             title : 'Article-Two',
             heading : 'Hello',
-            body : 'This is article wo. '
+            content : 'This is article two. '
     },
     'article-three' : {
             title : 'Article-Three',
             heading : 'Hello',
-            body : 'This is article three. '
+            content : 'This is article three. '
     },
     
 };
@@ -28,7 +28,7 @@ function createTemplate(data){
     
     var title = data.title;
     var heading = data.heading;
-    var body = data.heading;
+    var content = data.content;
     
     var htmlTemplate = `
         <html>
@@ -37,7 +37,7 @@ function createTemplate(data){
             </head>
             <body>
                 <h3>${heading}</h3>
-                <div>${body}</div>
+                <div>${content}</div>
             </body>
         </html>`; 
     return htmlTemplate;
