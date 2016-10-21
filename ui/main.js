@@ -22,6 +22,8 @@ submit.onclick = function(){
       }
   };
   
+  var commentInput = document.getElementById('comment');
+  var comment = commentInput.value;
   request.open('GET','http://shubhirg.imad.hasura-app.io/submit-comment?name=' + comment,true);
   request.send(null);
   
