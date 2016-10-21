@@ -42,6 +42,7 @@ function createTemplate(data){
                     <textarea cols = "10" rows = "5" name = "comment" id = "comment"></textarea>
                     <input type = "submit" value = "Submit" id = "submit_btn"></input>
                     <ul id = "commentlist"></ul>
+                    <script src = "/main.js" ></script>
                 </div>
             </body>
         </html>`; 
