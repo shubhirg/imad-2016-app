@@ -4,7 +4,7 @@ var commentInput = document.getElementById('comment');
   var submit = document.getElementById( "submit_btn");
 submit.onclick = function(){
   
-var comments = ['c1','c2'];
+var comments = ['c','d','f','ee'];
               var list = '';
               
               for(var i = 0; i < comments.length; i++){
