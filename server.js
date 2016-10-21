@@ -46,6 +46,13 @@ function createTemplate(data){
     return htmlTemplate;
 }
 
+var comments = [];
+app.get('/submit-comment',function(req,res){
+    var comment = req.query.name;
+    comments.push(comment);
+    res.send(JSON.stringify(comments));
+});
+
 app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'index.html'));
 });
@@ -64,12 +71,6 @@ app.get('/ui/madi.png', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'madi.png'));
 });
 
-var comments = [];
-app.get('/submit-comment',function(req,res){
-    var comment = req.query.name;
-    comments.push(comment);
-    res.send(JSON.stringify(comments));
-});
 
 
 var port = 8080; // Use 8080 for local development because you might already have apache running on 80
