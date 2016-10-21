@@ -22,7 +22,7 @@ submit.onclick = function(){
       }
   };
   
-  request.open('GET','http://shubhirg.imad.hasura-app.io/article-one/submit-name?name=' + comment,true);
+  request.open('GET','http://shubhirg.imad.hasura-app.io/submit-comment?name=' + comment,true);
   request.send(null);
   
 };
