@@ -1,7 +1,7 @@
 
 var commentInput = document.getElementById('comment');
   var comment = commentInput.value;
-  var submit = getElementById( "submit_btn");
+  var submit = document.getElementById( "submit_btn");
 submit.onclick = function(){
   
 var comments = ['c1','c2'];
