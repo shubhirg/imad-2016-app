@@ -1,15 +1,10 @@
-var submit = getElementById( "submit_btn");
+
+var commentInput = document.getElementById('comment');
+  var comment = commentInput.value;
+  var submit = getElementById( "submit_btn");
 submit.onclick = function(){
   
-  var request = new  XMLHttpRequest();
-  request.onreadystatechange = function(){
-      
-      if(request.readyState === XMLHttpRequest.DONE){
-          
-          if(request.status === 200){
-              
-              var comments = request.responseText;
-              comments = JSON.parse(comments);
+var comments = ['c1','c2'];
               var list = '';
               
               for(var i = 0; i < comments.length; i++){
@@ -17,14 +12,7 @@ submit.onclick = function(){
               }
               
               var ul = document.getElementById('commentlist');
-              ul.innerHTML = list;
-          } 
-      }
+              ul.innerHTML = list;    
+    
   };
   
-  var commentInput = document.getElementById('comment');
-  var comment = commentInput.value;
-  request.open('GET','http://shubhirg.imad.hasura-app.io/submit-comment?name=' + comment,true);
-  request.send(null);
-  
-};
