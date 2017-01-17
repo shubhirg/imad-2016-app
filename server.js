@@ -4,7 +4,10 @@ var path = require('path');
 var Pool = require('pg').Pool;
 var crypto = require('crypto');
 var bodyParser = require('body-parser');
-var session = require('express-session');
+var session = require('express-session')
+    , fs       = require('fs')
+    , http     = require('http')
+    , util     = require('util');
 
 var config = {
     user: 'shubhirg',
@@ -71,13 +74,6 @@ app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'index.html'));
 });
 
-app.get('/ui/index.jpg', function (req, res) {
-res.sendFile(path.join(__dirname, 'ui', 'index.jpg'));
-});
-
-app.get('/ui/menu.png', function (req, res) {
-res.sendFile(path.join(__dirname, 'ui', 'menu.png'));
-});
 
 function hash (input, salt) {
     // How do we create a hash?
