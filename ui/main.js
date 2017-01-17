@@ -1,13 +1,83 @@
 
-function loadLoginForm () {
+
+function loadLeftMenu () {
+    var menu = document.getElementById('menu');
+    menu.onclick = function () {
+    var request = new XMLHttpRequest();
+      request.onreadystatechange = function () {
+          if (request.readyState === XMLHttpRequest.DONE) {
+            var menuContent = document.getElementById('menuContent');              
+            if (request.status === 200) {
+                  var content = '';
+                  var articleData = JSON.parse(this.responseText);   /*how to get image from folder configure server to folder*/
+                  content += `<a href="/articles/${articleData[i].heading}">Traveling Diaries</a>`;
+                  articles.innerHTML = content;
+              } else {
+                  articles.innerHTML('Oops! Could not load all articles!')
+              }
+          }
+      };
+      
+      request.open('GET', '/get-articles', true);
+      request.send(null);
+  }
+      var menuContent = document.getElementById('menuContent');
+      menuContent.innerHTML = `<a href="/articles/travel">Traveling Diaries</a>
+                                <a href="/articles/"
+                                <button type="submit" id="music">Music</button>
+                                <button type="submit" id="family">Family</button>
+                                <button type="submit" id="technology">Technology</button>
+                                <button type="submit" id="food">Food</button>
+                                <button type="submit" id="replies">Replies</button>
+                                <button type="submit" id="aboutme">About Me</button>
+                                <button type="submit" id="contact">Share Your Thoughts</button>`;
+    }
+}
+
+function loadSearch() {
+  var search = document.getElementById('searchmenu');
+  search.innerHTML = '<input type= "text" name="search" id="search" placeholder="Search.." />';
+}
+ 
+function loadLoginForm () {    /*Enter display Image option*/
+
     var loginHtml = `
-        <h3>Login/Register to unlock awesome features</h3>
-        <input type="text" id="username" placeholder="username" />
-        <input type="password" id="password" />
-        <br/><br/>
-        <input type="submit" id="login_btn" value="Login" />
-        <input type="submit" id="register_btn" value="Register" />
+        
+          <div id="id01" class="modal">
+            
+            <div class="modal-content animate">
+              <div class="imgcontainer">
+                <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+                <img src="img_avatar2.png" alt="Avatar" class="avatar">
+              </div>
+
+              <div class="container">
+                <label><b>Username</b></label>
+                <input type="text" placeholder="Enter Username" id="username" required>
+
+                <label><b>Password</b></label>
+                <input type="password" placeholder="Enter Password" id="password" required>
+                  
+               <center><button type="submit" id="login_btn">Login</button>
+                <button type="submit" id="register_btn">Not a follower ? Register</button></center>
+              </div>
+
+              <div class="container" style="background-color:#f1f1f1">
+                <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+                <span class="psw">Forgot <a href="#">password?</a></span>
+              </div>
+            </form>
+          </div>
+       
         `;
+    var modal = document.getElementById('id01');
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
     document.getElementById('login_area').innerHTML = loginHtml;
     
     // Submit username/password to login
@@ -23,7 +93,7 @@ function loadLoginForm () {
               if (request.status === 200) {
                   submit.value = 'Sucess!';
               } else if (request.status === 403) {
-                  submit.value = 'Invalid credentials. Try again?';
+                  submit.value = 'Invalid credentials. Try again.';
               } else if (request.status === 500) {
                   alert('Something went wrong on the server');
                   submit.value = 'Login';
@@ -81,9 +151,9 @@ function loadLoginForm () {
 }
 
 function loadLoggedInUser (username) {
-    var loginArea = document.getElementById('login_area');
+    var loginArea = document.getElementById('login_area');                                                            /*take logout away from here and add user image*/
     loginArea.innerHTML = `
-        <h3> Hi <i>${username}</i></h3>
+        <h3> Welcome, <i>${username}</i>!</h3>
         <a href="/logout">Logout</a>
     `;
 }
@@ -96,7 +166,7 @@ function loadLogin () {
             if (request.status === 200) {
                 loadLoggedInUser(this.responseText);
             } else {
-                loadLoginForm();
+                 loadLoginForm();
             }
         }
     };
@@ -113,11 +183,15 @@ function loadArticles () {
             var articles = document.getElementById('articles');
             if (request.status === 200) {
                 var content = '<ul>';
-                var articleData = JSON.parse(this.responseText);
+                var articleData = JSON.parse(this.responseText);   /*how to get image from folder configure server to folder*/
                 for (var i=0; i< articleData.length; i++) {
                     content += `<li>
+                    (${articleData[i].date.split('T')[0]})
+                    </br>
                     <a href="/articles/${articleData[i].title}">${articleData[i].heading}</a>
-                    (${articleData[i].date.split('T')[0]})</li>`;
+                    <img src= "${articleData[i].articleimage}" class = "img-circle" >                                     
+                    <hr/>
+                    </li>`;
                 }
                 content += "</ul>"
                 articles.innerHTML = content;
@@ -137,3 +211,6 @@ loadLogin();
 
 // Now this is something that we could have directly done on the server-side using templating too!
 loadArticles();
+
+loadLeftMenu();
+loadSearch();
