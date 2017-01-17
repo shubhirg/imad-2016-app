@@ -25,10 +25,10 @@ function loadLoginForm () {
               } else if (request.status === 403) {
                   submit.value = 'Invalid credentials. Try again?';
               } else if (request.status === 500) {
-                  alert('Something went wrong on the server1');
+                  alert('Something went wrong on the server');
                   submit.value = 'Login';
               } else {
-                  alert('Something went wrong on the server2');
+                  alert('Something went wrong on the server');
                   submit.value = 'Login';
               }
               loadLogin();
@@ -137,4 +137,3 @@ loadLogin();
 
 // Now this is something that we could have directly done on the server-side using templating too!
 loadArticles();
-  
